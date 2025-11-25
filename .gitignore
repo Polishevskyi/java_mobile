@@ -1,7 +1,17 @@
+# ============================================
+# Maven Build Artifacts
+# ============================================
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+dependency-reduced-pom.xml
+
+# ============================================
+# IDE Files
+# ============================================
 
 ### IntelliJ IDEA ###
 .idea/
@@ -12,6 +22,7 @@ target/
 *.iws
 *.iml
 *.ipr
+out/
 
 ### Eclipse ###
 .apt_generated
@@ -21,6 +32,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.metadata
 
 ### NetBeans ###
 /nbproject/private/
@@ -34,28 +46,82 @@ build/
 
 ### VS Code ###
 .vscode/
+*.code-workspace
+
+# ============================================
+# Operating Systems
+# ============================================
 
 ### Mac OS ###
 .DS_Store
-
-### Logs ###
-*.log
-Appiumlog.txt
+.AppleDouble
+.LSOverride
 
 ### Linux ###
 *~
+.directory
+.Trash-*
 
 ### Windows ###
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
-### Swap files ###
+# ============================================
+# Logs and Debug Files
+# ============================================
+*.log
+Appiumlog.txt
+log/
+logs/
+hs_err_pid*
+replay_pid*
+
+# ============================================
+# Configuration and Credentials
+# ============================================
+config.properties
+.env
+.env.local
+.env.*.local
+*.properties.local
+browserstack.yml
+.browserstack
+
+# ============================================
+# Test Artifacts and Reports
+# ============================================
+screenshot/
+screenshots/
+test-output/
+allure-results/
+allure-report/
+extent-reports/
+reports/
+surefire-reports/
+failsafe-reports/
+
+# ============================================
+# Appium and Mobile Testing
+# ============================================
+node_modules/
+package-lock.json
+.appium/
+
+# ============================================
+# Temporary and Cache Files
+# ============================================
 *.swp
 *.swo
+*.tmp
+*.temp
+*.bak
+*.cache
+.cache/
 
-### Docker ###
+# ============================================
+# Docker
+# ============================================
 docker-compose.override.yml
-
-### Debug and profiling files ###
-hs_err_pid*
+.dockerignore
