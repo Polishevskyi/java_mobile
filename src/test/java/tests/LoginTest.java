@@ -1,10 +1,12 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import screens.LoginScreen;
 import screens.MenuScreen;
 import screens.ProductsScreen;
 import utils.ConfigReader;
+import utils.Constants;
 
 public class LoginTest extends BaseTest {
     @Test(description = "Verify that user can login with valid credentials")
@@ -12,9 +14,11 @@ public class LoginTest extends BaseTest {
         MenuScreen menuScreen = new ProductsScreen().openMenu();
         LoginScreen loginScreen = menuScreen.navigateToLogin();
 
-        loginScreen.enterUsername(ConfigReader.getProperty("validUsername"))
+        ProductsScreen productsScreen = loginScreen.enterUsername(ConfigReader.getProperty("validUsername"))
                 .enterPassword(ConfigReader.getProperty("validPassword"))
-                .tapLoginButton()
-                .verifyProductPageVisible();
+                .tapLoginButton();
+
+        Assert.assertEquals(productsScreen.getProductsHeaderText(), Constants.PRODUCT_PAGE_HEADER_TEXT,
+                Constants.ASSERT_ELEMENT_VISIBLE + Constants.PRODUCT_PAGE_HEADER_NAME);
     }
 }

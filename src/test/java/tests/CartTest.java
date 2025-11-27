@@ -10,19 +10,19 @@ public class CartTest extends BaseTest {
     @Test(description = "Verify that user can add and remove product from cart")
     public void addAndRemoveProductFromCartTest() {
         ProductsScreen productsScreen = new ProductsScreen();
-        
+
         String productName = productsScreen.getFirstProductName();
-        productsScreen.tapOnFirstProduct();
-        productsScreen.tapAddToCartButton();
-        
+        productsScreen.tapOnFirstProduct()
+                .tapAddToCartButton();
+
         CartScreen cartScreen = productsScreen.openCart();
-        
+
         String productNameInCart = cartScreen.getProductNameInCart();
-        Assert.assertEquals(productNameInCart, productName, 
+        Assert.assertEquals(productNameInCart, productName,
                 Constants.ASSERT_PRODUCT_IN_CART + productName);
-        
+
         cartScreen.tapRemoveItemButton();
-        cartScreen.verifyProductNotInCart();
+        Assert.assertEquals(cartScreen.getGoShoppingButtonText(), Constants.BUTTON_GO_SHOPPING);
     }
 }
 

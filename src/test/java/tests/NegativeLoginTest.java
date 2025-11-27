@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import screens.LoginScreen;
@@ -13,13 +14,13 @@ public class NegativeLoginTest extends BaseTest {
 
     @DataProvider(name = "invalidCredentials")
     public Object[][] invalidCredentialsData() {
-        return new Object[][] {
-            {"", ConfigReader.getProperty("validPassword"), Constants.ERROR_USERNAME_REQUIRED},
-            {ConfigReader.getProperty("validUsername"), "", Constants.ERROR_PASSWORD_REQUIRED},
-            {"", "", Constants.ERROR_USERNAME_REQUIRED},
-            {DataGenerator.email(), ConfigReader.getProperty("validPassword"), Constants.ERROR_INVALID_CREDENTIALS},
-            {ConfigReader.getProperty("validUsername"), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS},
-            {DataGenerator.email(), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS}
+        return new Object[][]{
+                {"", ConfigReader.getProperty("validPassword"), Constants.ERROR_USERNAME_REQUIRED},
+                {ConfigReader.getProperty("validUsername"), "", Constants.ERROR_PASSWORD_REQUIRED},
+                {"", "", Constants.ERROR_USERNAME_REQUIRED},
+                {DataGenerator.email(), ConfigReader.getProperty("validPassword"), Constants.ERROR_INVALID_CREDENTIALS},
+                {ConfigReader.getProperty("validUsername"), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS},
+                {DataGenerator.email(), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS}
         };
     }
 
@@ -30,8 +31,18 @@ public class NegativeLoginTest extends BaseTest {
 
         loginScreen.enterUsername(username)
                 .enterPassword(password)
-                .tapLoginButtonExpectingError()
-                .verifyErrorMessageDisplayed(expectedError);
+                .tapLoginButtonExpectingError();
+
+        String actualError = "";
+        if (expectedError.equals(Constants.ERROR_USERNAME_REQUIRED)) {
+            actualError = loginScreen.getUserNameErrorText();
+        } else if (expectedError.equals(Constants.ERROR_PASSWORD_REQUIRED)) {
+            actualError = loginScreen.getPasswordErrorText();
+        } else if (expectedError.equals(Constants.ERROR_INVALID_CREDENTIALS)) {
+            actualError = loginScreen.getCredentialsErrorText();
+        }
+
+        Assert.assertEquals(actualError, expectedError);
     }
 }
 

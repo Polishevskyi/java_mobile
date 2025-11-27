@@ -1,36 +1,60 @@
 package screens;
 
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.By;
+import utils.appium.driver.AppDriver;
 
 public class LoginScreen extends BaseScreen {
-    private final By usernameField = AppiumBy.accessibilityId("Username input field");
-    private final By passwordField = AppiumBy.accessibilityId("Password input field");
-    private final By loginButton = AppiumBy.accessibilityId("Login button");
-    private final By errorMessage = AppiumBy.accessibilityId("generic-error-message");
+    private By usernameField = AppiumBy.accessibilityId("Username input field");
+    private By passwordField = AppiumBy.accessibilityId("Password input field");
+    private By loginButton = AppiumBy.accessibilityId("Login button");
+    private By userNameErrorText;
+    private By passwordErrorText;
+    private By credentialsErrorText;
+
+    public LoginScreen() {
+        if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
+            userNameErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView");
+            passwordErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView");
+            credentialsErrorText = By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
+        } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
+            userNameErrorText = By.xpath("//XCUIElementTypeOther[@name='Username-error-message']/XCUIElementTypeStaticText");
+            passwordErrorText = By.xpath("//XCUIElementTypeOther[@name='Password-error-message']/XCUIElementTypeStaticText");
+            credentialsErrorText = By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
+        }
+    }
 
     public LoginScreen enterUsername(String username) {
-        setValue(usernameField, username);
+        waitNtype(usernameField, username);
         return this;
     }
 
     public LoginScreen enterPassword(String password) {
-        setValue(passwordField, password);
+        waitNtype(passwordField, password);
         return this;
     }
 
     public ProductsScreen tapLoginButton() {
-        tapWhenVisible(loginButton);
+        waitNclick(loginButton);
         return new ProductsScreen();
     }
 
     public LoginScreen tapLoginButtonExpectingError() {
-        tapWhenVisible(loginButton);
+        waitNclick(loginButton);
         return this;
     }
 
-    public LoginScreen verifyErrorMessageDisplayed(String expectedError) {
-        assertElementValueContains(errorMessage, expectedError);
-        return this;
+    public String getUserNameErrorText() {
+        return getText(userNameErrorText);
+    }
+
+    public String getPasswordErrorText() {
+        return getText(passwordErrorText);
+    }
+
+    public String getCredentialsErrorText() {
+        return getText(credentialsErrorText);
     }
 }
