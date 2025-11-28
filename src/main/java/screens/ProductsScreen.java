@@ -4,20 +4,20 @@ import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 
 public class ProductsScreen extends BaseScreen {
-    private By productsHeader = AppiumBy.xpath("//android.widget.TextView[@text=\"Products\"]");
-    private By openMenuButton = AppiumBy.accessibilityId("open menu");
-    private By sortButton = AppiumBy.accessibilityId("sort button");
-    private By cartIcon = AppiumBy.accessibilityId("cart badge");
-    private By nameAscendingOption = AppiumBy.accessibilityId("nameAsc");
-    private By nameDescendingOption = AppiumBy.accessibilityId("nameDesc");
-    private By priceAscendingOption = AppiumBy.accessibilityId("priceAsc");
-    private By priceDescendingOption = AppiumBy.accessibilityId("priceDesc");
-    private By firstProductName = AppiumBy.xpath("(//android.widget.TextView[@content-desc='store item text'])[1]");
-    private By firstProduct = AppiumBy.xpath("(//android.view.ViewGroup[@content-desc='store item'])[1]");
-    private By addToCartButton = AppiumBy.accessibilityId("Add To Cart button");
+    private final By productsHeader = AppiumBy.xpath("//android.widget.TextView[@text=\"Products\"]");
+    private final By openMenuBtn = AppiumBy.accessibilityId("open menu");
+    private final By sortBtn = AppiumBy.accessibilityId("sort button");
+    private final By cartIcon = AppiumBy.accessibilityId("cart badge");
+    private final By nameAscendingOpt = AppiumBy.accessibilityId("nameAsc");
+    private final By nameDescendingOpt = AppiumBy.accessibilityId("nameDesc");
+    private final By priceAscendingOpt = AppiumBy.accessibilityId("priceAsc");
+    private final By priceDescendingOpt = AppiumBy.accessibilityId("priceDesc");
+    private final By firstProductName = AppiumBy.xpath("(//android.widget.TextView[@content-desc='store item text'])[1]");
+    private final By firstProduct = AppiumBy.xpath("(//android.view.ViewGroup[@content-desc='store item'])[1]");
+    private final By addToCartBtn = AppiumBy.accessibilityId("Add To Cart button");
 
     public MenuScreen openMenu() {
-        waitNclick(openMenuButton);
+        tap(openMenuBtn);
         return new MenuScreen();
     }
 
@@ -25,47 +25,40 @@ public class ProductsScreen extends BaseScreen {
         return getText(productsHeader);
     }
 
-    public ProductsScreen tapSortButton() {
-        waitNclick(sortButton);
-        return this;
+    public void tapSortButton() {
+        tap(sortBtn);
     }
 
-    public ProductsScreen selectNameAscending() {
-        waitNclick(nameAscendingOption);
-        return this;
+    public void selectNameAscending() {
+        tap(nameAscendingOpt);
     }
 
-    public ProductsScreen selectNameDescending() {
-        waitNclick(nameDescendingOption);
-        return this;
+    public void selectNameDescending() {
+        tap(nameDescendingOpt);
     }
 
-    public ProductsScreen selectPriceAscending() {
-        waitNclick(priceAscendingOption);
-        return this;
+    public void selectPriceAscending() {
+        tap(priceAscendingOpt);
     }
 
-    public ProductsScreen selectPriceDescending() {
-        waitNclick(priceDescendingOption);
-        return this;
+    public void selectPriceDescending() {
+        tap(priceDescendingOpt);
     }
 
     public String getFirstProductName() {
         return getText(firstProductName);
     }
 
-    public ProductsScreen tapOnFirstProduct() {
-        waitNclick(firstProduct);
-        return this;
+    public void tapOnFirstProduct() {
+        tap(firstProduct);
     }
 
-    public ProductsScreen tapAddToCartButton() {
-        waitNclick(addToCartButton);
-        return this;
+    public void tapAddToCartButton() {
+        tap(addToCartBtn);
     }
 
     public CartScreen openCart() {
-        waitNclick(cartIcon);
+        tap(cartIcon);
         return new CartScreen();
     }
 }

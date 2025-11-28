@@ -2,131 +2,49 @@ package screens;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.appium.driver.AppDriver;
 
 import java.time.Duration;
-import java.util.List;
 
 public class BaseScreen {
 
-    public BaseScreen() {
-        PageFactory.initElements(new AppiumFieldDecorator(AppDriver.getCurrentDriver()), this);
+    private static final int DEFAULT_TIMEOUT_SECONDS = 30;
+
+    protected WebElement waitUntilElementPresent(By locator) {
+        WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(30));
-
-    protected WebElement waitForEl(By byLocator) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
+    protected WebElement findElement(By locator) {
+        return AppDriver.getCurrentDriver().findElement(locator);
     }
 
-    protected WebElement getEl(By byLocator) {
-        return AppDriver.getCurrentDriver().findElement(byLocator);
+    protected void enterText(By locator, String text) {
+        waitUntilElementPresent(locator);
+        findElement(locator).clear();
+        findElement(locator).sendKeys(text);
     }
 
-    protected List<WebElement> getEls(By byLocator) {
-        return AppDriver.getCurrentDriver().findElements(byLocator);
+    protected void tap(By locator) {
+        waitUntilElementPresent(locator).click();
     }
 
-    protected void click(By byLocator) {
-        getEl(byLocator).click();
-    }
-
-    protected void type(By byLocator, String text) {
-        getEl(byLocator).sendKeys(text);
-    }
-
-    protected void waitNtype(By byLocator, String text) {
-        waitForEl(byLocator);
-        getEl(byLocator).clear();
-        getEl(byLocator).sendKeys(text);
-    }
-
-    protected void waitNclick(By byLocator) {
-        waitForEl(byLocator).click();
-    }
-
-    protected int size(By byLocator) {
-        return getEls(byLocator).size();
-    }
-
-    protected int size(List<WebElement> els) {
-        return els.size();
-    }
-
-    protected String getText(By byLocator) {
+    protected String getText(By locator) {
         String str = "";
         if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
-            str = getEl(byLocator).getText();
+            str = findElement(locator).getText();
         } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
-            str = getAttribute(byLocator, "value");
+            str = getAttribute(locator, "value");
         }
         return str;
     }
 
-    protected String getAttribute(By byLocator, String attr) {
-        return waitForEl(byLocator).getAttribute(attr);
+    protected String getAttribute(By locator, String attributeName) {
+        return waitUntilElementPresent(locator).getAttribute(attributeName);
     }
 
-    protected boolean isListItemsContain(List<WebElement> items, String text) {
-        boolean flag = false;
-
-        for (WebElement el : items) {
-            if (el.getText().contains(text)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
-
-    protected boolean isTextMatches(WebElement el, String text) {
-        return el.getText().equalsIgnoreCase(text);
-    }
-
-    protected boolean isTextContains(WebElement el, String text) {
-        return el.getText().contains(text);
-    }
-
-    protected Select getDropDownElement(By byLocator) {
-        return new Select(AppDriver.getCurrentDriver().findElement(byLocator));
-    }
-
-    private Select getDropDownElement(WebElement el) {
-        return new Select(el);
-    }
-
-    public void selectDropDownByOption(WebElement el, String option) {
-        getDropDownElement(el).selectByVisibleText(option);
-    }
-
-    protected List<WebElement> getDropDownOptions(WebElement el) {
-        return getDropDownElement(el).getOptions();
-    }
-
-    protected List<WebElement> getDropDownAllSelectedOptions(WebElement el) {
-        return getDropDownElement(el).getAllSelectedOptions();
-    }
-
-    protected WebElement getDropDownSelectedOption(WebElement el) {
-        return getDropDownElement(el).getFirstSelectedOption();
-    }
-
-    protected boolean isDropDownItemscontain(WebElement element, String text) {
-        boolean flag = false;
-        List<WebElement> els = getDropDownElement(element).getOptions();
-        for (WebElement el : els) {
-            if (el.getText().contains(text)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
 }

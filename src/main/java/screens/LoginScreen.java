@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import utils.appium.driver.AppDriver;
 
 public class LoginScreen extends BaseScreen {
-    private By usernameField = AppiumBy.accessibilityId("Username input field");
-    private By passwordField = AppiumBy.accessibilityId("Password input field");
-    private By loginButton = AppiumBy.accessibilityId("Login button");
+    private final By usernameField = AppiumBy.accessibilityId("Username input field");
+    private final By passwordField = AppiumBy.accessibilityId("Password input field");
+    private final By loginBtn = AppiumBy.accessibilityId("Login button");
     private By userNameErrorText;
     private By passwordErrorText;
     private By credentialsErrorText;
@@ -26,24 +26,20 @@ public class LoginScreen extends BaseScreen {
         }
     }
 
-    public LoginScreen enterUsername(String username) {
-        waitNtype(usernameField, username);
-        return this;
+    public void enterUsername(String username) {
+        enterText(usernameField, username);
     }
 
-    public LoginScreen enterPassword(String password) {
-        waitNtype(passwordField, password);
-        return this;
+    public void enterPassword(String password) {
+        enterText(passwordField, password);
     }
 
-    public ProductsScreen tapLoginButton() {
-        waitNclick(loginButton);
-        return new ProductsScreen();
+    public void tapLoginButton() {
+        tap(loginBtn);
     }
 
-    public LoginScreen tapLoginButtonExpectingError() {
-        waitNclick(loginButton);
-        return this;
+    public void tapLoginButtonExpectingError() {
+        tap(loginBtn);
     }
 
     public String getUserNameErrorText() {

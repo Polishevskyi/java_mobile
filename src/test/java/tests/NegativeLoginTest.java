@@ -29,9 +29,9 @@ public class NegativeLoginTest extends BaseTest {
         MenuScreen menuScreen = new ProductsScreen().openMenu();
         LoginScreen loginScreen = menuScreen.navigateToLogin();
 
-        loginScreen.enterUsername(username)
-                .enterPassword(password)
-                .tapLoginButtonExpectingError();
+        loginScreen.enterUsername(username);
+        loginScreen.enterPassword(password);
+        loginScreen.tapLoginButtonExpectingError();
 
         String actualError = "";
         if (expectedError.equals(Constants.ERROR_USERNAME_REQUIRED)) {

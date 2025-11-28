@@ -14,9 +14,11 @@ public class LoginTest extends BaseTest {
         MenuScreen menuScreen = new ProductsScreen().openMenu();
         LoginScreen loginScreen = menuScreen.navigateToLogin();
 
-        ProductsScreen productsScreen = loginScreen.enterUsername(ConfigReader.getProperty("validUsername"))
-                .enterPassword(ConfigReader.getProperty("validPassword"))
-                .tapLoginButton();
+        loginScreen.enterUsername(ConfigReader.getProperty("validUsername"));
+        loginScreen.enterPassword(ConfigReader.getProperty("validPassword"));
+        loginScreen.tapLoginButton();
+
+        ProductsScreen productsScreen = new ProductsScreen();
 
         Assert.assertEquals(productsScreen.getProductsHeaderText(), Constants.PRODUCT_PAGE_HEADER_TEXT,
                 Constants.ASSERT_ELEMENT_VISIBLE + Constants.PRODUCT_PAGE_HEADER_NAME);

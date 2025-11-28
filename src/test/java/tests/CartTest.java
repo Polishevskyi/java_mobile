@@ -12,8 +12,8 @@ public class CartTest extends BaseTest {
         ProductsScreen productsScreen = new ProductsScreen();
 
         String productName = productsScreen.getFirstProductName();
-        productsScreen.tapOnFirstProduct()
-                .tapAddToCartButton();
+        productsScreen.tapOnFirstProduct();
+        productsScreen.tapAddToCartButton();
 
         CartScreen cartScreen = productsScreen.openCart();
 
