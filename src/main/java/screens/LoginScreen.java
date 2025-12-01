@@ -10,6 +10,7 @@ public class LoginScreen extends BaseScreen {
     private final By usernameField = AppiumBy.accessibilityId("Username input field");
     private final By passwordField = AppiumBy.accessibilityId("Password input field");
     private final By loginBtn = AppiumBy.accessibilityId("Login button");
+
     private By userNameErrorText;
     private By passwordErrorText;
     private By credentialsErrorText;

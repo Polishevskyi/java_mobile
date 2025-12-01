@@ -38,13 +38,8 @@ public class BaseScreen {
         if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
             str = findElement(locator).getText();
         } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
-            str = getAttribute(locator, "value");
+            str = waitUntilElementPresent(locator).getAttribute("label");
         }
         return str;
     }
-
-    protected String getAttribute(By locator, String attributeName) {
-        return waitUntilElementPresent(locator).getAttribute(attributeName);
-    }
-
 }
