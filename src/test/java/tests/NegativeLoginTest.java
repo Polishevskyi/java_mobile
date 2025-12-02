@@ -15,11 +15,11 @@ public class NegativeLoginTest extends BaseTest {
     @DataProvider(name = "invalidCredentials")
     public Object[][] invalidCredentialsData() {
         return new Object[][]{
-                {"", ConfigReader.getProperty("validPassword"), Constants.ERROR_USERNAME_REQUIRED},
-                {ConfigReader.getProperty("validUsername"), "", Constants.ERROR_PASSWORD_REQUIRED},
+                {"", ConfigReader.getProperty("test.credentials.password"), Constants.ERROR_USERNAME_REQUIRED},
+                {ConfigReader.getProperty("test.credentials.username"), "", Constants.ERROR_PASSWORD_REQUIRED},
                 {"", "", Constants.ERROR_USERNAME_REQUIRED},
-                {DataGenerator.email(), ConfigReader.getProperty("validPassword"), Constants.ERROR_INVALID_CREDENTIALS},
-                {ConfigReader.getProperty("validUsername"), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS},
+                {DataGenerator.email(), ConfigReader.getProperty("test.credentials.password"), Constants.ERROR_INVALID_CREDENTIALS},
+                {ConfigReader.getProperty("test.credentials.username"), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS},
                 {DataGenerator.email(), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS}
         };
     }

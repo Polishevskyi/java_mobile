@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TestSuite" parallel="methods" thread-count="5">
+    <test name="AllTests">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.NegativeLoginTest"/>
+            <class name="tests.CartTest"/>
+            <class name="tests.SortTest"/>
+        </classes>
+    </test>
+</suite>
+

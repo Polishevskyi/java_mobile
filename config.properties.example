@@ -5,21 +5,20 @@ platform=android
 isCloud=false
 
 # Test Data
-validUsername=bob@example.com
-validPassword=10203040
+test.credentials.username=bob@example.com
+test.credentials.password=10203040
 
 # Appium Server Configuration
-appiumJsPath=/opt/homebrew/lib/node_modules/appium/build/lib/main.js
-nodePath=/opt/homebrew/bin/node
-appiumPort=4723
-appiumLocalUrl=http://127.0.0.1:4723/
+appium.jsPath=/opt/homebrew/lib/node_modules/appium/build/lib/main.js
+appium.nodePath=/opt/homebrew/bin/node
+appium.port=4723
+appium.localUrl=http://127.0.0.1:4723/
 
 # BrowserStack Configuration
-browserstackUserName=YOUR_BROWSERSTACK_USERNAME
-browserstackAccessKey=YOUR_BROWSERSTACK_ACCESS_KEY
-browserstackAppiumVersion=2.4.1
-browserstackHubUrl=http://hub-cloud.browserstack.com/wd/hub/
-browserstackOptionsKey=bstack:options
+browserstack.username=YOUR_BROWSERSTACK_USERNAME
+browserstack.accessKey=YOUR_BROWSERSTACK_ACCESS_KEY
+browserstack.appiumVersion=2.4.1
+browserstack.hubUrl=http://hub-cloud.browserstack.com/wd/hub/
 
 # Android Local Configuration
 android.local.deviceName=Pixel 6 Pro API 34

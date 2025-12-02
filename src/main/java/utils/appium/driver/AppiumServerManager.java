@@ -1,8 +1,8 @@
 package utils.appium.driver;
 
-import utils.ConfigReader;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import utils.ConfigReader;
 
 import java.io.File;
 
@@ -12,9 +12,9 @@ public class AppiumServerManager {
     private static void initialize() {
         AppiumServiceBuilder builder = new AppiumServiceBuilder();
         builder
-                .withAppiumJS(new File(ConfigReader.getProperty("appiumJsPath")))
-                .usingDriverExecutable(new File(ConfigReader.getProperty("nodePath")))
-                .usingPort(Integer.parseInt(ConfigReader.getProperty("appiumPort")));
+                .withAppiumJS(new File(ConfigReader.getProperty("appium.jsPath")))
+                .usingDriverExecutable(new File(ConfigReader.getProperty("appium.nodePath")))
+                .usingPort(Integer.parseInt(ConfigReader.getProperty("appium.port")));
         server = AppiumDriverLocalService.buildService(builder);
     }
 

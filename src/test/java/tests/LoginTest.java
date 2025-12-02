@@ -14,8 +14,8 @@ public class LoginTest extends BaseTest {
         MenuScreen menuScreen = new ProductsScreen().openMenu();
         LoginScreen loginScreen = menuScreen.navigateToLogin();
 
-        loginScreen.enterUsername(ConfigReader.getProperty("validUsername"));
-        loginScreen.enterPassword(ConfigReader.getProperty("validPassword"));
+        loginScreen.enterUsername(ConfigReader.getProperty("test.credentials.username"));
+        loginScreen.enterPassword(ConfigReader.getProperty("test.credentials.password"));
         loginScreen.tapLoginButton();
 
         ProductsScreen productsScreen = new ProductsScreen();

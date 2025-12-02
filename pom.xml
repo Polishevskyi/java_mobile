@@ -95,6 +95,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/test-suite.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <classpathDependencyExcludes>
                         <classpathDependencyExclude>com.browserstack:browserstack-java-sdk</classpathDependencyExclude>
                     </classpathDependencyExcludes>

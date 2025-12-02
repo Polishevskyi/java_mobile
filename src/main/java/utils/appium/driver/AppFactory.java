@@ -1,36 +1,64 @@
 package utils.appium.driver;
 
-import utils.ConfigReader;
-import utils.appium.TestConfig;
-import utils.appium.enums.Platform;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import utils.ConfigReader;
+import utils.appium.TestConfig;
+import utils.appium.enums.Platform;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AppFactory {
 
     private static AppiumDriver driver;
+    private static volatile String suiteBuildName = null;
 
     private static Map<String, Object> getBrowserstackOptions() {
         Map<String, Object> options = new HashMap<>();
-        options.put("userName", ConfigReader.getProperty("browserstackUserName"));
-        options.put("accessKey", ConfigReader.getProperty("browserstackAccessKey"));
-        options.put("appiumVersion", ConfigReader.getProperty("browserstackAppiumVersion"));
+        options.put("userName", ConfigReader.getProperty("browserstack.username"));
+        options.put("accessKey", ConfigReader.getProperty("browserstack.accessKey"));
+        options.put("appiumVersion", ConfigReader.getProperty("browserstack.appiumVersion"));
+        options.put("buildName", getBuildName());
+        options.put("projectName", getProjectName());
         return options;
+    }
+
+    private static String getBuildName() {
+        synchronized (AppFactory.class) {
+            if (suiteBuildName == null) {
+                String platform = TestConfig.platform.toString();
+                String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+                suiteBuildName = platform + " - " + date;
+            }
+            return suiteBuildName;
+        }
+    }
+
+    private static String getProjectName() {
+        return Objects.requireNonNullElse(
+                ConfigReader.getProperty("browserstack.projectName"),
+                System.getProperty("browserstack.projectName", "Mobile Automation")
+        );
+    }
+
+    public static void resetBuildName() {
+        suiteBuildName = null;
     }
 
     private static URI getServerUrl() {
         String url = TestConfig.environment.isCloud()
-                ? ConfigReader.getProperty("browserstackHubUrl")
-                : ConfigReader.getProperty("appiumLocalUrl");
+                ? ConfigReader.getProperty("browserstack.hubUrl")
+                : ConfigReader.getProperty("appium.localUrl");
         return URI.create(url);
     }
 
@@ -50,7 +78,7 @@ public class AppFactory {
         if (appPath != null && !appPath.isEmpty()) {
             if (TestConfig.environment.isCloud()) {
                 options.setApp(appPath)
-                        .setCapability(ConfigReader.getProperty("browserstackOptionsKey"), getBrowserstackOptions());
+                        .setCapability("bstack:options", getBrowserstackOptions());
             } else {
                 File appFile = new File(appPath);
                 if (!appFile.isAbsolute()) {
@@ -77,7 +105,7 @@ public class AppFactory {
             options.setUdid(ConfigReader.getProperty(prefix + "udid"));
         } else {
             options.setApp(ConfigReader.getProperty(prefix + "app"))
-                    .setCapability(ConfigReader.getProperty("browserstackOptionsKey"), getBrowserstackOptions());
+                    .setCapability("bstack:options", getBrowserstackOptions());
         }
 
         return options;
