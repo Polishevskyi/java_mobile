@@ -97,6 +97,9 @@ screenshots/
 test-output/
 allure-results/
 allure-report/
+target/allure-results/
+target/allure-report/
+.allure/
 extent-reports/
 reports/
 surefire-reports/
