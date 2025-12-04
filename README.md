@@ -127,10 +127,10 @@ java_mobile/
 
 ### 🌐 Supported Platforms
 
-- **Android** (primary platform)
-- **iOS** (via Appium)
-- **BrowserStack Cloud** (cloud testing)
-- **Local Testing** (Appium Server)
+- **Android**
+- **iOS**
+- **BrowserStack Cloud** 
+- **Local Testing** 
 
 ---
 
@@ -394,7 +394,6 @@ nano config.properties  # or any editor
 
 # Install Appium (if not installed)
 npm install -g appium
-npm install -g appium-gestures-plugin
 
 # Install dependencies (Maven will download automatically)
 mvn clean install
@@ -402,11 +401,19 @@ mvn clean install
 
 ### 🎯 First Run
 
+> **💡 Configuration Note:**  
+> Parameters `platform` and `isCloud` can be passed via command-line flags or configured in `config.properties`.  
+> - **With flags:** flag values override values from `config.properties`  
+> - **Without flags:** values from `config.properties` are used
+
 ```bash
-# Run all tests locally (Android)
+# Run all tests locally (Android) - with flags
 mvn clean test -Dplatform=android -DisCloud=false
 
-# Run all tests on BrowserStack (Android)
+# Run all tests locally - without flags (will use values from config.properties)
+mvn clean test
+
+# Run all tests on BrowserStack (Android) - with flags
 mvn clean test -Dplatform=android -DisCloud=true
 
 # Generate Allure report
@@ -414,43 +421,6 @@ mvn allure:serve
 ```
 
 ---
-
-## 🧪 Test Execution
-
-### 📱 Mobile Tests
-
-```bash
-# All mobile tests (Android, Local)
-mvn clean test -Dplatform=android -DisCloud=false
-
-# All mobile tests (Android, BrowserStack)
-mvn clean test -Dplatform=android -DisCloud=true
-
-# All mobile tests (iOS, Local)
-mvn clean test -Dplatform=ios -DisCloud=false
-
-# All mobile tests (iOS, BrowserStack)
-mvn clean test -Dplatform=ios -DisCloud=true
-
-# Specific test class
-mvn test -Dtest=LoginTest
-
-# Specific test method
-mvn test -Dtest=LoginTest#validLoginTest
-```
-
-### ⚙️ Environment Configuration
-
-```bash
-# BrowserStack (cloud)
-mvn test -Dplatform=android -DisCloud=true
-
-# Local testing
-mvn test -Dplatform=android -DisCloud=false
-
-# With additional parameters
-mvn test -Dplatform=android -DisCloud=false -DuseGesturePlugin=false -DchromeAutoDownloadDriver=false
-```
 
 ### 🔄 Parallel Execution
 
@@ -484,14 +454,6 @@ mvn allure:serve
 mvn allure:report allure:serve
 ```
 
-### 📈 Report Types
-
-- **📊 Summary** - overall statistics
-- **📋 Test Cases** - detailed results
-- **📈 Trends** - execution trends
-- **🔍 Behaviors** - behavioral tests
-- **📱 Suites** - test groups
-
 ### 🔔 Telegram Notifications
 
 Automatic notifications about results via `send-telegram-notification.sh`:
@@ -520,7 +482,7 @@ Automatic test execution on:
 ### 📋 Workflow Stages
 
 1. **Setup** - install Java and Maven
-2. **Lint** - code quality check (Spotless)
+2. **Quality Gate** - code quality check with Spotless (blocks test execution if failed)
 3. **Tests** - execute mobile tests
 4. **Report** - generate Allure reports
 5. **Notify** - send Telegram notifications
