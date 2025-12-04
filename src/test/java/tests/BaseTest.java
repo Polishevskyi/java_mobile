@@ -7,10 +7,11 @@ import utils.appium.TestConfig;
 import utils.appium.driver.AppFactory;
 import utils.appium.driver.AppiumServerManager;
 import utils.listeners.AllureListener;
+import utils.listeners.BrowserStackListener;
 
 import java.net.MalformedURLException;
 
-@Listeners({AllureTestNg.class, AllureListener.class})
+@Listeners({AllureTestNg.class, AllureListener.class, BrowserStackListener.class})
 public class BaseTest {
 
     @BeforeSuite
