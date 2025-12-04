@@ -23,6 +23,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <allure-maven.version>2.12.0</allure-maven.version>
+        <spotless.version>2.43.0</spotless.version>
     </properties>
 
     <dependencies>
@@ -128,6 +129,20 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure-maven.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless.version}</version>
+                <configuration>
+                    <java>
+                        <palantirJavaFormat>
+                            <version>2.39.0</version>
+                        </palantirJavaFormat>
+                        <removeUnusedImports/>
+                    </java>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,18 +1,19 @@
 package utils;
 
 public class Constants {
-    private Constants() {
-    }
+    private Constants() {}
 
     // Error messages - Login
     public static final String ERROR_USERNAME_REQUIRED = "Username is required";
     public static final String ERROR_PASSWORD_REQUIRED = "Password is required";
-    public static final String ERROR_INVALID_CREDENTIALS = "Provided credentials do not match any user in this service.";
+    public static final String ERROR_INVALID_CREDENTIALS =
+            "Provided credentials do not match any user in this service.";
 
     // Error messages - Configuration
     public static final String ERROR_PLATFORM_NULL = "Platform value cannot be null or empty";
     public static final String ERROR_PLATFORM_INVALID = "Invalid platform value: %s. Expected: android or ios";
-    public static final String ERROR_ENVIRONMENT_INVALID = "Invalid environment value: %s. Expected: true/false or local/cloud";
+    public static final String ERROR_ENVIRONMENT_INVALID =
+            "Invalid environment value: %s. Expected: true/false or local/cloud";
     public static final String ERROR_LOADING_CONFIG = "Error loading config.properties from project root: %s";
     public static final String ERROR_ACCESSING_CONFIG = "Error accessing config.properties: %s";
 
@@ -45,4 +46,3 @@ public class Constants {
     public static final String PRODUCT_PAGE_HEADER_TEXT = "Products";
     public static final String PRODUCT_PAGE_HEADER_NAME = "Products header";
 }
-

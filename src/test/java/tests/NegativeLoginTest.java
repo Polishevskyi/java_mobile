@@ -14,13 +14,21 @@ public class NegativeLoginTest extends BaseTest {
 
     @DataProvider(name = "invalidCredentials")
     public Object[][] invalidCredentialsData() {
-        return new Object[][]{
-                {"", ConfigReader.getProperty("test.credentials.password"), Constants.ERROR_USERNAME_REQUIRED},
-                {ConfigReader.getProperty("test.credentials.username"), "", Constants.ERROR_PASSWORD_REQUIRED},
-                {"", "", Constants.ERROR_USERNAME_REQUIRED},
-                {DataGenerator.email(), ConfigReader.getProperty("test.credentials.password"), Constants.ERROR_INVALID_CREDENTIALS},
-                {ConfigReader.getProperty("test.credentials.username"), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS},
-                {DataGenerator.email(), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS}
+        return new Object[][] {
+            {"", ConfigReader.getProperty("test.credentials.password"), Constants.ERROR_USERNAME_REQUIRED},
+            {ConfigReader.getProperty("test.credentials.username"), "", Constants.ERROR_PASSWORD_REQUIRED},
+            {"", "", Constants.ERROR_USERNAME_REQUIRED},
+            {
+                DataGenerator.email(),
+                ConfigReader.getProperty("test.credentials.password"),
+                Constants.ERROR_INVALID_CREDENTIALS
+            },
+            {
+                ConfigReader.getProperty("test.credentials.username"),
+                DataGenerator.password(),
+                Constants.ERROR_INVALID_CREDENTIALS
+            },
+            {DataGenerator.email(), DataGenerator.password(), Constants.ERROR_INVALID_CREDENTIALS}
         };
     }
 
@@ -45,4 +53,3 @@ public class NegativeLoginTest extends BaseTest {
         Assert.assertEquals(actualError, expectedError);
     }
 }
-

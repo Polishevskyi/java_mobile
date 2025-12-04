@@ -5,10 +5,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
-import utils.ConfigReader;
-import utils.appium.TestConfig;
-import utils.appium.enums.Platform;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -17,6 +13,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import utils.ConfigReader;
+import utils.appium.TestConfig;
+import utils.appium.enums.Platform;
 
 public class AppFactory {
 
@@ -47,8 +46,7 @@ public class AppFactory {
     private static String getProjectName() {
         return Objects.requireNonNullElse(
                 ConfigReader.getProperty("browserstack.projectName"),
-                System.getProperty("browserstack.projectName", "Mobile Automation")
-        );
+                System.getProperty("browserstack.projectName", "Mobile Automation"));
     }
 
     public static void resetBuildName() {
@@ -77,8 +75,7 @@ public class AppFactory {
         String appPath = ConfigReader.getProperty(prefix + "app");
         if (appPath != null && !appPath.isEmpty()) {
             if (TestConfig.environment.isCloud()) {
-                options.setApp(appPath)
-                        .setCapability("bstack:options", getBrowserstackOptions());
+                options.setApp(appPath).setCapability("bstack:options", getBrowserstackOptions());
             } else {
                 File appFile = new File(appPath);
                 if (!appFile.isAbsolute()) {

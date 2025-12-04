@@ -20,7 +20,9 @@ public class LoginTest extends BaseTest {
 
         ProductsScreen productsScreen = new ProductsScreen();
 
-        Assert.assertEquals(productsScreen.getProductsHeaderText(), Constants.PRODUCT_PAGE_HEADER_TEXT,
+        Assert.assertEquals(
+                productsScreen.getProductsHeaderText(),
+                Constants.PRODUCT_PAGE_HEADER_TEXT,
                 Constants.ASSERT_ELEMENT_VISIBLE + Constants.PRODUCT_PAGE_HEADER_NAME);
     }
 }

@@ -14,7 +14,9 @@ public class ConfigReader {
 
     private static void loadProperties() {
         try {
-            try (FileInputStream input = new FileInputStream(Paths.get(System.getProperty("user.dir"), "config.properties").toFile())) {
+            try (FileInputStream input =
+                    new FileInputStream(Paths.get(System.getProperty("user.dir"), "config.properties")
+                            .toFile())) {
                 properties.load(input);
             } catch (IOException e) {
                 System.err.println(String.format(Constants.ERROR_LOADING_CONFIG, e.getMessage()));
@@ -41,4 +43,3 @@ public class ConfigReader {
         return value;
     }
 }
-

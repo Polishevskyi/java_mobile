@@ -78,7 +78,9 @@ public class BrowserStackListener implements ITestListener {
 
     private String getTestName(ITestResult result) {
         String description = result.getMethod().getDescription();
-        return (description != null && !description.isEmpty()) ? description : result.getMethod().getMethodName();
+        return (description != null && !description.isEmpty())
+                ? description
+                : result.getMethod().getMethodName();
     }
 
     private String extractFailureReason(ITestResult result) {
@@ -87,7 +89,9 @@ public class BrowserStackListener implements ITestListener {
             return "";
         }
         String message = throwable.getMessage();
-        return (message != null && !message.isEmpty()) ? message : throwable.getClass().getSimpleName();
+        return (message != null && !message.isEmpty())
+                ? message
+                : throwable.getClass().getSimpleName();
     }
 
     private String escapeJson(String value) {
@@ -101,4 +105,3 @@ public class BrowserStackListener implements ITestListener {
                 .replace("\t", " ");
     }
 }
-

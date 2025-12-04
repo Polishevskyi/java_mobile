@@ -7,7 +7,7 @@ import screens.ProductsScreen;
 import utils.Constants;
 
 public class SortTest extends BaseTest {
-    
+
     @DataProvider(name = "sortOptions")
     public Object[][] sortOptionsData() {
         return new Object[][] {
@@ -21,9 +21,9 @@ public class SortTest extends BaseTest {
     @Test(dataProvider = "sortOptions", description = "Verify that products are sorted correctly")
     public void sortProductsTest(String sortType, String expectedProductName) {
         ProductsScreen productsScreen = new ProductsScreen();
-        
+
         productsScreen.tapSortButton();
-        
+
         switch (sortType) {
             case "nameAsc":
                 productsScreen.selectNameAscending();
@@ -38,10 +38,11 @@ public class SortTest extends BaseTest {
                 productsScreen.selectPriceDescending();
                 break;
         }
-        
+
         String actualProductName = productsScreen.getFirstProductName();
-        Assert.assertEquals(actualProductName, expectedProductName, 
+        Assert.assertEquals(
+                actualProductName,
+                expectedProductName,
                 Constants.ASSERT_FIRST_PRODUCT_AFTER_SORTING + expectedProductName);
     }
 }
-

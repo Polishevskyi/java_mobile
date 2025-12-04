@@ -1,6 +1,8 @@
 package utils.listeners;
 
 import io.qameta.allure.Allure;
+import java.io.ByteArrayInputStream;
+import java.util.function.Supplier;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,9 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utils.appium.driver.AppDriver;
-
-import java.io.ByteArrayInputStream;
-import java.util.function.Supplier;
 
 public class AllureListener implements ITestListener {
 
@@ -97,7 +96,9 @@ public class AllureListener implements ITestListener {
 
     private String getTestName(ITestResult result) {
         String description = result.getMethod().getDescription();
-        return (description != null && !description.isEmpty()) ? description : result.getMethod().getMethodName();
+        return (description != null && !description.isEmpty())
+                ? description
+                : result.getMethod().getMethodName();
     }
 
     private String buildErrorMessage(ITestResult result) {
@@ -121,4 +122,3 @@ public class AllureListener implements ITestListener {
         }
     }
 }
-

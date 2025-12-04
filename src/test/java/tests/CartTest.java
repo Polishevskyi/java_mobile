@@ -18,11 +18,9 @@ public class CartTest extends BaseTest {
         CartScreen cartScreen = productsScreen.openCart();
 
         String productNameInCart = cartScreen.getProductNameInCart();
-        Assert.assertEquals(productNameInCart, productName,
-                Constants.ASSERT_PRODUCT_IN_CART + productName);
+        Assert.assertEquals(productNameInCart, productName, Constants.ASSERT_PRODUCT_IN_CART + productName);
 
         cartScreen.tapRemoveItemButton();
         Assert.assertEquals(cartScreen.getGoShoppingButtonText(), Constants.BUTTON_GO_SHOPPING);
     }
 }
-

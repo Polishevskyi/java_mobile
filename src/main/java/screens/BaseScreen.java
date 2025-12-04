@@ -2,6 +2,7 @@ package screens;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,15 +10,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.appium.driver.AppDriver;
 import utils.listeners.AllureListener;
 
-import java.time.Duration;
-
 public class BaseScreen {
 
     private static final int DEFAULT_TIMEOUT_SECONDS = 30;
 
     protected WebElement waitUntilElementPresent(By locator) {
         return AllureListener.logWaitForElement(locator, () -> {
-            WebDriverWait wait = new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS));
+            WebDriverWait wait =
+                    new WebDriverWait(AppDriver.getCurrentDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS));
             return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         });
     }

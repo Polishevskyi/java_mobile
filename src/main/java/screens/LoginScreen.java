@@ -17,13 +17,19 @@ public class LoginScreen extends BaseScreen {
 
     public LoginScreen() {
         if (AppDriver.getCurrentDriver() instanceof AndroidDriver) {
-            userNameErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView");
-            passwordErrorText = By.xpath("//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView");
-            credentialsErrorText = By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
+            userNameErrorText = By.xpath(
+                    "//android.view.ViewGroup[@content-desc='Username-error-message']/android.widget.TextView");
+            passwordErrorText = By.xpath(
+                    "//android.view.ViewGroup[@content-desc='Password-error-message']/android.widget.TextView");
+            credentialsErrorText =
+                    By.xpath("//android.view.ViewGroup[@content-desc='generic-error-message']/android.widget.TextView");
         } else if (AppDriver.getCurrentDriver() instanceof IOSDriver) {
-            userNameErrorText = By.xpath("//XCUIElementTypeOther[@name='Username-error-message']/XCUIElementTypeStaticText");
-            passwordErrorText = By.xpath("//XCUIElementTypeOther[@name='Password-error-message']/XCUIElementTypeStaticText");
-            credentialsErrorText = By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
+            userNameErrorText =
+                    By.xpath("//XCUIElementTypeOther[@name='Username-error-message']/XCUIElementTypeStaticText");
+            passwordErrorText =
+                    By.xpath("//XCUIElementTypeOther[@name='Password-error-message']/XCUIElementTypeStaticText");
+            credentialsErrorText =
+                    By.xpath("//XCUIElementTypeOther[@name='generic-error-message']/XCUIElementTypeStaticText");
         }
     }
 
